@@ -1,0 +1,523 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact Us | Nilgiri</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --font-body: 'Poppins', sans-serif;
+      --font-display: 'Space Grotesk', sans-serif;
+
+      /* 5-brand palette */
+      --brand-primary: #1ea672;
+      --brand-accent: #3b82f6;
+      --brand-dark: #102a43;
+      --brand-bg: #f3f7fa;
+      --brand-surface: #ffffff;
+      --chart-running: rgba(59,130,246,.35);
+
+      /* mapped legacy vars */
+      --green: var(--brand-primary);
+      --green-soft: rgba(30, 166, 114, 0.14);
+      --ink: var(--brand-dark);
+      --ink-soft: var(--brand-dark);
+      --blue: var(--brand-accent);
+      --white: var(--brand-surface);
+      --muted: color-mix(in srgb, var(--brand-dark) 55%, var(--brand-surface));
+
+      /* compatibility aliases */
+      --font-head: var(--font-display);
+      --surface: var(--brand-surface);
+      --bg: var(--brand-bg);
+      --primary: var(--brand-primary);
+      --accent: var(--brand-accent);
+      --line: rgba(16, 42, 67, 0.14);
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font-body);
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 90% 8%, rgba(30,166,114,.14), transparent 30%),
+        radial-gradient(circle at 8% 90%, rgba(59,130,246,.12), transparent 28%),
+        var(--bg);
+    }
+
+    h1, h2, h3, h4, h5 { font-family: var(--font-head); }
+
+    .top-header {
+      background: #000;
+      border: 1px solid rgba(16, 42, 67, 0.12);
+      border-bottom: 2px solid var(--accent);
+      position: sticky;
+      top: 0;
+      z-index: 30;
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    .brand-logo {
+      width:10%;
+      /* width: clamp(140px, 18vw, 220px); */
+      height: auto;
+      display: block;
+    }
+
+    .main-nav .nav-link {
+      /* color: var(--ink); */
+      color: var(--brand-surface);
+      text-transform: uppercase;
+      font-weight: 500;
+      font-size: .95rem;
+      letter-spacing: .01em;
+      padding-left: .9rem !important;
+      padding-right: .9rem !important;
+      font-family: var(--font-head);
+    }
+
+    .main-nav .nav-link:hover { color: var(--primary); }
+
+    .main-nav .nav-link.active {
+      color: var(--primary);
+      text-decoration: underline;
+      text-underline-offset: 5px;
+    }
+
+    .main-nav .dropdown-toggle::after {
+      margin-left: .35rem;
+      vertical-align: .15em;
+    }
+
+    .main-nav .navbar-toggler {
+      border: 1px solid rgba(16, 42, 67, 0.2);
+      padding: .35rem .55rem;
+    }
+
+    .main-nav .navbar-toggler:focus {
+      box-shadow: 0 0 0 .2rem rgba(59, 130, 246, .18);
+    }
+
+    .hero { padding: 2.2rem 0 1.3rem; }
+
+    .hero-panel {
+      background:
+        linear-gradient(118deg, rgba(11,29,51,.92), rgba(17,48,86,.78)),
+        url('assets/images/hero-banner.png') center/cover no-repeat;
+      color: #fff;
+      border-radius: 24px;
+      padding: 2.1rem 1.4rem;
+      box-shadow: 0 18px 34px rgba(16,42,67,.18);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 10% 15%, rgba(30,166,114,.34), transparent 28%),
+        radial-gradient(circle at 88% 84%, rgba(59,130,246,.28), transparent 30%);
+      pointer-events: none;
+    }
+
+    .hero-panel > * { position: relative; z-index: 1; }
+
+    .hero-kicker {
+      display: inline-flex;
+      gap: .45rem;
+      align-items: center;
+      border: 1px solid rgba(255,255,255,.35);
+      border-radius: 999px;
+      padding: .3rem .75rem;
+      font-size: .76rem;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+
+    .hero-title {
+      margin: .9rem 0 .5rem;
+      font-size: clamp(2rem, 5vw, 3.3rem);
+      line-height: .95;
+    }
+
+    .hero-copy {
+      margin: 0;
+      color: rgba(255,255,255,.9);
+      max-width: 760px;
+    }
+
+    .contact-shell { padding: 1.6rem 0 3.7rem; }
+
+    .quick-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: .9rem;
+      margin-bottom: 1rem;
+    }
+
+    .quick-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 1rem;
+      box-shadow: 0 10px 24px rgba(16,42,67,.06);
+      min-height: 128px;
+    }
+
+    .quick-card i {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      color: var(--accent);
+      background: rgba(59,130,246,.12);
+      margin-bottom: .55rem;
+    }
+
+    .quick-card h4 {
+      margin: 0 0 .25rem;
+      font-size: .98rem;
+    }
+
+    .quick-card p,
+    .quick-card a {
+      margin: 0;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: .9rem;
+      line-height: 1.5;
+    }
+
+    .contact-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      box-shadow: 0 20px 40px rgba(16,42,67,.1);
+      overflow: hidden;
+    }
+
+    .form-pane { padding: 1.5rem; }
+
+    .pane-kicker {
+      color: var(--primary);
+      text-transform: uppercase;
+      font-size: .78rem;
+      letter-spacing: .05em;
+      font-weight: 700;
+      margin-bottom: .3rem;
+    }
+
+    .form-title {
+      font-size: clamp(1.45rem, 3vw, 2rem);
+      margin-bottom: .4rem;
+    }
+
+    .form-sub {
+      color: var(--muted);
+      margin-bottom: 1.05rem;
+      font-size: .92rem;
+    }
+
+    .form-label {
+      font-size: .86rem;
+      color: #3f5b70;
+      font-weight: 600;
+      margin-bottom: .32rem;
+    }
+
+    .form-control,
+    .form-select {
+      border: 1px solid rgba(17,42,70,.19);
+      border-radius: 12px;
+      min-height: 48px;
+      box-shadow: none !important;
+      font-size: .92rem;
+      padding-left: .85rem;
+    }
+
+    .form-control:focus,
+    .form-select:focus {
+      border-color: rgba(59,130,246,.5);
+    }
+
+    textarea.form-control {
+      min-height: 118px;
+      resize: vertical;
+    }
+
+    .send-btn {
+      min-height: 48px;
+      border: 0;
+      border-radius: 12px;
+      color: #fff;
+      background: linear-gradient(130deg, var(--primary), #19795a);
+      font-family: var(--font-head);
+      font-weight: 600;
+      padding: .7rem 1.25rem;
+    }
+
+    .media-pane {
+      position: relative;
+      min-height: 100%;
+      background: #0c2340;
+    }
+
+    .media-pane img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .media-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(165deg, rgba(9,20,40,.8), rgba(9,20,40,.46));
+      color: #fff;
+      padding: 1.3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .media-bullets {
+      margin: .8rem 0 0;
+      padding: 0;
+      list-style: none;
+      color: rgba(255,255,255,.88);
+      font-size: .88rem;
+      display: grid;
+      gap: .45rem;
+    }
+
+    .media-bullets li i { margin-right: .4rem; color: #9be2c5; }
+
+    .socials {
+      display: flex;
+      gap: .55rem;
+      margin-top: .9rem;
+    }
+
+    .socials a {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,.35);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      text-decoration: none;
+    }
+
+    .scroll-reveal {
+      opacity: 0;
+      transform: translateY(22px) scale(.985);
+      transition: opacity .65s ease, transform .65s ease;
+      transition-delay: var(--reveal-delay, 0ms);
+    }
+
+    .scroll-reveal.in-view {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    @media (max-width: 1199px) {
+      .quick-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 991px) {
+      .brand-logo { width: clamp(120px, 32vw, 170px); }
+      .quick-grid { grid-template-columns: 1fr; }
+      .media-pane { min-height: 270px; }
+      .hero-panel { border-radius: 16px; }
+      .form-pane { padding: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+  <header class="top-header">
+    <nav class="navbar navbar-expand-lg main-nav py-2">
+      <div class="container-fluid px-3 px-lg-4">
+        <a class="brand-wrap w-50" href="index.html#home">
+          <img src="assets/images/Ng_logo.png" alt="Neelgiri Motocorp logo" class="brand-logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavContact" aria-controls="mainNavContact" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="mainNavContact">
+          <ul class="navbar-nav ms-auto gap-lg-2">
+            <li class="nav-item"><a class="nav-link" href="index.html#home">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="about_us.html">About Us</a></li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="products.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">Products</a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="products.html#aeries">Aeries</a></li>
+                <li><a class="dropdown-item" href="products.html#glide">Glide</a></li>
+                <li><a class="dropdown-item" href="products.html#amper">Amper</a></li>
+                <li><a class="dropdown-item" href="products.html#luma">Luma</a></li>
+                <li><a class="dropdown-item" href="products.html#sonex">Sonex</a></li>
+                <li><a class="dropdown-item" href="products.html#voltra-x">Voltra X</a></li>
+                <li><a class="dropdown-item" href="products.html#zoro">Zoro</a></li>
+              </ul>
+            </li>
+            <li class="nav-item"><a class="nav-link active" href="contact_us.html">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <div class="hero-panel">
+        <div class="hero-kicker"><i class="fa-solid fa-headset"></i>Business Support Team</div>
+        <h1 class="hero-title">Contact Nilgiri</h1>
+        <p class="hero-copy">Need pricing, dealership, fleet consultation, or service assistance? Share your details and our team will respond with the right guidance quickly.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact-shell">
+    <div class="container">
+      <div class="quick-grid">
+        <div class="quick-card">
+          <i class="fa-solid fa-phone-volume"></i>
+          <h4>Sales Helpline</h4>
+          <a href="tel:+919530612345">(+91) 95306 12345</a>
+        </div>
+        <div class="quick-card">
+          <i class="fa-solid fa-envelope-open-text"></i>
+          <h4>Email Support</h4>
+          <a href="mailto:support@nilgiriEV.com">support@nilgiriEV.com</a>
+        </div>
+        <div class="quick-card">
+          <i class="fa-solid fa-location-dot"></i>
+          <h4>Office Address</h4>
+          <p>Mansa Road, Bathinda, Punjab, India</p>
+        </div>
+        <div class="quick-card">
+          <i class="fa-solid fa-clock"></i>
+          <h4>Working Hours</h4>
+          <p>Mon-Sat, 10:00 AM - 7:00 PM</p>
+        </div>
+      </div>
+
+      <div class="contact-card">
+        <div class="row g-0 align-items-stretch">
+          <div class="col-lg-7">
+            <div class="form-pane">
+              <div class="pane-kicker">Get In Touch</div>
+              <h2 class="form-title">Share Your Requirement</h2>
+              <p class="form-sub">Complete this form with accurate details so we can connect you with the right team quickly.</p>
+              <form>
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <label class="form-label">Full Name</label>
+                    <input type="text" class="form-control" placeholder="Enter full name">
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Phone Number</label>
+                    <input type="tel" class="form-control" placeholder="Enter phone number">
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" class="form-control" placeholder="Enter email">
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">City</label>
+                    <input type="text" class="form-control" placeholder="Enter city">
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Interested Model</label>
+                    <select class="form-select">
+                      <option selected disabled>Select model</option>
+                      <option>Aeries</option>
+                      <option>Glide</option>
+                      <option>Amper</option>
+                      <option>Luma</option>
+                      <option>Sonex</option>
+                      <option>Voltra X</option>
+                      <option>Zoro</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Purpose</label>
+                    <select class="form-select">
+                      <option selected disabled>Select purpose</option>
+                      <option>Book Test Ride</option>
+                      <option>Price Inquiry</option>
+                      <option>Dealership Inquiry</option>
+                      <option>Service Support</option>
+                      <option>Fleet / Bulk Purchase</option>
+                    </select>
+                  </div>
+                  <div class="col-12">
+                    <label class="form-label">Message</label>
+                    <textarea class="form-control" placeholder="Write your requirement in brief"></textarea>
+                  </div>
+                  <div class="col-12 d-flex justify-content-between align-items-center flex-wrap gap-2">
+                    <!-- <small class="text-muted">We usually respond within 24 business hours.</small> -->
+                    <button type="submit" class="send-btn">Submit Details</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="col-lg-5">
+            <div class="media-pane">
+              <img src="assets/images/pexels-ulyutkafile-30600051.jpg" alt="Nilgiri support team">
+              <div class="media-overlay">
+                <h4 class="mb-1">Reliable Business Support</h4>
+                <p class="mb-0 text-white-50">From test rides to ownership assistance, we support every step of your EV journey.</p>
+                <ul class="media-bullets">
+                  <li><i class="fa-solid fa-circle-check"></i>Transparent pricing support</li>
+                  <li><i class="fa-solid fa-circle-check"></i>Dedicated callback assistance</li>
+                  <li><i class="fa-solid fa-circle-check"></i>Easy booking and service coordination</li>
+                </ul>
+                <div class="socials">
+                  <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                  <a href="https://x.com" target="_blank" rel="noopener noreferrer" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+                  <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                  <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.14 });
+
+    const targets = document.querySelectorAll('.hero-panel, .quick-card, .contact-card, .form-pane, .media-pane');
+    targets.forEach((el, i) => {
+      el.classList.add('scroll-reveal');
+      el.style.setProperty('--reveal-delay', `${(i % 6) * 70}ms`);
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>

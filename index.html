@@ -1,0 +1,1894 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nilgiri</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --font-body: 'Poppins', sans-serif;
+      --font-display: 'Space Grotesk', sans-serif;
+
+      /* 5-brand palette */
+      --brand-primary: #1ea672;
+      --brand-accent: #3b82f6;
+      --brand-dark: #102a43;
+      --brand-bg: #f3f7fa;
+      --brand-surface: #ffffff;
+      --chart-running: rgba(59,130,246,.35);
+
+      /* mapped legacy vars */
+      --green: var(--brand-primary);
+      --green-soft: rgba(30, 166, 114, 0.14);
+      --ink: var(--brand-dark);
+      --ink-soft: var(--brand-dark);
+      --blue: var(--brand-accent);
+      --white: var(--brand-surface);
+      --muted: color-mix(in srgb, var(--brand-dark) 55%, var(--brand-surface));
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--brand-bg);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4, h5, h6,
+    .mission-title,
+    .savings-title,
+    .emi-title,
+    .faq-title,
+    .bar-name,
+    .result-chart-head {
+      font-family: var(--font-display);
+      letter-spacing: -0.01em;
+    }
+
+    .main-nav .nav-link,
+    .btn-electric,
+    .calc-btn,
+    .test-btn,
+    .emi-label,
+    .chart-label,
+    .compare-legend,
+    .footer-mini-links {
+      font-family: var(--font-display);
+    }
+
+    .top-header {
+      background: #000;
+      border: 1px solid rgba(16, 42, 67, 0.12);
+      border-bottom: 2px solid var(--brand-accent);
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    .brand-logo {
+      width:10%;
+      /* width: clamp(140px, 18vw, 220px); */
+      height: auto;
+      display: block;
+    }
+
+    .main-nav .nav-link {
+      color: var(--brand-surface);
+      text-transform: uppercase;
+      font-weight: 500;
+      font-size: .95rem;
+      letter-spacing: .01em;
+      padding-left: .9rem !important;
+      padding-right: .9rem !important;
+    }
+    .main-nav .nav-link:hover { color: var(--brand-primary); }
+    .main-nav .nav-link.active {
+      color: var(--brand-primary);
+      text-decoration: underline;
+      text-underline-offset: 5px;
+    }
+
+    .main-nav .dropdown-toggle::after {
+      margin-left: .35rem;
+      vertical-align: .15em;
+    }
+
+    .main-nav .navbar-toggler {
+      border: 1px solid rgba(16, 42, 67, 0.2);
+      padding: .35rem .55rem;
+    }
+
+    .main-nav .navbar-toggler:focus {
+      box-shadow: 0 0 0 .2rem rgba(59, 130, 246, .18);
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      color: var(--brand-surface);
+      position: relative;
+      overflow: hidden;
+      background: var(--brand-dark);
+    }
+
+    .hero-media {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+    }
+
+    .hero .container {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 4.8rem);
+      font-weight: 800;
+      line-height: .95;
+      margin-bottom: 1rem;
+    }
+
+    .hero p { color: rgba(255, 255, 255, 0.82); font-size: clamp(1rem, 1.6vw, 1.35rem); }
+
+    .btn-electric {
+      background: linear-gradient(135deg, var(--brand-primary), var(--brand-dark));
+      color: var(--brand-surface);
+      border: 0;
+      padding: .85rem 1.4rem;
+      border-radius: 999px;
+      font-weight: 800;
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .btn-electric:hover { transform: translateY(-2px); box-shadow: 0 12px 26px rgba(30,166,114,.35); }
+
+    .section-pad { padding: 5rem 0; }
+
+    .mission-section {
+      background: var(--brand-bg);
+      padding: 5rem 0 4rem;
+    }
+
+    .mission-media {
+      position: relative;
+      min-height: 510px;
+    }
+
+    .mission-img-main {
+      width: 66%;
+      border-radius: 38px 0 0 0;
+      /* min-height: 380px; */
+      overflow: hidden;
+      /* background: #000; */
+    }
+
+    .mission-img-overlay {
+      position: absolute;
+      left: 18%;
+      bottom: 0;
+      width: 80%;
+      /* min-height: 100%; */
+      border-radius: 0 0 38px 0;
+      box-shadow: 0 18px 30px rgba(9, 16, 31, .18);
+      overflow: hidden;
+      background: var(--brand-dark);
+    }
+
+    .mission-img-main img,
+    .mission-img-overlay img {
+      width: 100%;
+      /* height: 100%; */
+      object-fit: cover;
+      display: block;
+    }
+
+    .mission-badge {
+      position: absolute;
+      left: 68%;
+      top: 7%;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: var(--brand-primary);
+      color: var(--brand-dark);
+      display: grid;
+      place-items: center;
+      text-align: center;
+      border: 2px dotted rgba(255,255,255,.9);
+      font-weight: 800;
+      z-index: 2;
+    }
+
+    .mission-kicker {
+      font-size: .9rem;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .mission-kicker::before {
+      content: "•";
+      color: var(--brand-primary);
+      margin-right: .45rem;
+      font-size: 1.8rem;
+      line-height: 0;
+      vertical-align: middle;
+    }
+
+    .mission-title {
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      line-height: 1.08;
+      font-weight: 800;
+      margin: .6rem 0 1rem;
+    }
+
+    .mission-copy {
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.8;
+      max-width: 96%;
+    }
+
+    .mission-point-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .check-row {
+      display: flex;
+      gap: .8rem;
+      align-items: flex-start;
+      margin-top: .9rem;
+      font-weight: 700;
+    }
+
+    .check-icon {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--brand-primary);
+      color: var(--brand-surface);
+      display: grid;
+      place-items: center;
+      font-size: .75rem;
+      margin-top: .2rem;
+      flex: 0 0 20px;
+    }
+
+    .video-section {
+      padding: 4.5rem 0;
+      background: var(--brand-bg);
+    }
+
+    .video-wrap {
+      /* border-radius: 20px; */
+      overflow: hidden;
+      /*border: 1px solid #e4eaf2; */
+      box-shadow: 0 16px 34px rgba(16, 42, 67, 0.08);
+      background: var(--brand-dark);
+    }
+
+    .video-wrap video,
+    .video-wrap iframe {
+      width: 100%;
+      height: 100%;
+      min-height: 320px;
+      display: block;
+      object-fit: cover;
+      border: 0;
+    }
+
+    .ride-card {
+      border-radius: 22px;
+      background: var(--brand-surface);
+      box-shadow: 0 14px 34px rgba(16, 42, 67, .12);
+      overflow: hidden;
+    }
+
+    .ride-media {
+      position: relative;
+      min-height: 520px;
+    }
+
+    .ride-media img {
+      width: 100%;
+      height: 100%;
+      min-height: 520px;
+      display: block;
+      object-fit: cover;
+    }
+
+    .ride-overlay {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: min(44%, 520px);
+      padding: 4rem 2.4rem;
+
+      color: var(--brand-surface);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .ride-mobile-copy {
+      display: none;
+      padding: 1.6rem 1.2rem;
+      background: linear-gradient(140deg, #0b1f36 0%, #15355f 100%);
+      color: var(--brand-surface);
+    }
+
+    .test-btn {
+      background: linear-gradient(135deg, var(--brand-accent), var(--brand-accent));
+      color: var(--brand-surface);
+      border: none;
+      border-radius: 16px;
+      padding: 1rem 1.3rem;
+      font-size: 1.05rem;
+      font-weight: 800;
+      transition: all .25s ease;
+    }
+
+    .test-btn:hover {
+      transform: translateY(-3px) scale(1.01);
+      box-shadow: 0 12px 24px rgba(59, 130, 246, .35);
+    }
+
+    .highlight-tile {
+      border-radius: 16px;
+      background: var(--brand-surface);
+      border: 1px solid rgba(16, 42, 67, 0.12);
+      padding: 1.3rem;
+      min-height: 140px;
+      transition: .25s ease;
+    }
+    .highlight-tile:hover { transform: translateY(-5px); border-color: rgba(30,166,114,.35); }
+    .highlight-label { font-size: .82rem; text-transform: uppercase; color: var(--muted); letter-spacing: .05em; }
+    .highlight-value { font-size: 1.35rem; font-weight: 800; color: var(--ink-soft); }
+
+    .models-wrap {
+      margin-top: 2.3rem;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 14px 34px rgba(16, 42, 67, .1);
+      background: var(--brand-surface);
+      border: 1px solid rgba(16, 42, 67, 0.12);
+    }
+
+    #modelSlider,
+    #modelSlider .carousel-inner,
+    #modelSlider .carousel-item {
+      min-height: 78vh;
+    }
+
+    .model-slide {
+      padding: 2.5rem;
+      color: var(--brand-dark);
+      min-height: 78vh;
+      display: flex;
+      align-items: center;
+      gap: 1.6rem;
+      flex-wrap: wrap;
+      background: var(--brand-surface);
+    }
+
+    .asset-slide {
+      min-height: 78vh;
+      padding: 2.5rem;
+      display: flex;
+      align-items: center;
+      background: var(--brand-surface);
+    }
+
+    .asset-tile {
+      border-radius: 16px;
+      background: var(--brand-surface);
+      border: 1px solid rgba(16, 42, 67, 0.12);
+      padding: 1.3rem;
+      min-height: 150px;
+    }
+
+    .model-image {
+      flex: 1 1 280px;
+      min-height: 240px;
+      border-radius: 14px;
+      overflow: hidden;
+      background: var(--brand-surface);
+    }
+
+    .model-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      cursor: zoom-in;
+    }
+
+    .model-copy { flex: 1 1 260px; }
+    .model-copy h4 { font-size: clamp(1.3rem, 2.2vw, 2rem); font-weight: 800; color: var(--brand-dark); }
+    .model-copy p { color: var(--muted); }
+    .model-specs {
+      margin-top: 1rem;
+      border: 1px solid rgba(16, 42, 67, 0.12);
+      border-radius: 10px;
+      overflow: hidden;
+      font-size: .92rem;
+      max-width: 460px;
+    }
+    .model-specs .spec-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    .model-specs .spec-row:nth-child(odd) { background: rgba(16, 42, 67, 0.05); }
+    .model-specs .spec-row:nth-child(even) { background: rgba(16, 42, 67, 0.1); }
+    .model-specs .k,
+    .model-specs .v {
+      padding: .45rem .65rem;
+      line-height: 1.25;
+    }
+    .model-specs .k { color: var(--muted); }
+    .model-specs .v { color: var(--brand-dark); font-weight: 600; }
+    .model-slide.featured {
+      background: linear-gradient(135deg, rgba(59,130,246,.08) 0%, rgba(30,166,114,.08) 100%);
+      border: 1px solid rgba(59,130,246,.24);
+      border-radius: 20px;
+      box-shadow: 0 18px 36px rgba(16, 42, 67, 0.08);
+    }
+    .model-slide.featured .model-image {
+      border: 1px solid rgba(59,130,246,.3);
+      box-shadow: 0 14px 26px rgba(16, 42, 67, 0.12);
+    }
+    .featured-top {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: .7rem;
+      margin-bottom: .75rem;
+    }
+    .featured-pill {
+      background: var(--brand-dark);
+      color: var(--brand-surface);
+      font-size: .72rem;
+      letter-spacing: .06em;
+      font-weight: 700;
+      border-radius: 999px;
+      padding: .35rem .65rem;
+      text-transform: uppercase;
+    }
+    .featured-chip {
+      background: rgba(30,166,114,.16);
+      color: var(--brand-primary);
+      font-size: .78rem;
+      font-weight: 700;
+      border-radius: 999px;
+      padding: .35rem .7rem;
+    }
+    .model-highlights {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      margin-top: .7rem;
+      margin-bottom: .8rem;
+    }
+    .model-highlights span {
+      background: var(--brand-surface);
+      border: 1px solid rgba(59,130,246,.3);
+      color: var(--brand-accent);
+      border-radius: 999px;
+      padding: .35rem .7rem;
+      font-size: .78rem;
+      font-weight: 600;
+    }
+
+    #modelSlider .carousel-control-prev-icon,
+    #modelSlider .carousel-control-next-icon {
+      filter: invert(1) grayscale(1);
+    }
+
+    .viewer-360-wrap {
+      background: #0e1724;
+      border-radius: 14px;
+      padding: .8rem;
+      min-height: 460px;
+      display: grid;
+      place-items: center;
+      position: relative;
+      user-select: none;
+      overflow: hidden;
+    }
+
+    .viewer-360-img {
+      max-width: 100%;
+      max-height: 430px;
+      object-fit: contain;
+      display: block;
+      pointer-events: none;
+    }
+
+    .viewer-360-hint {
+      position: absolute;
+      bottom: .55rem;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255,255,255,.8);
+      background: rgba(0,0,0,.35);
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 999px;
+      font-size: .78rem;
+      padding: .32rem .65rem;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .viewer-ctrls {
+      display: flex;
+      gap: .6rem;
+    }
+
+    .viewer-btn {
+      border: 1px solid rgba(16,42,67,.2);
+      background: #fff;
+      border-radius: 8px;
+      min-width: 42px;
+      min-height: 38px;
+    }
+
+    .trust {
+      background: rgba(30,166,114,.08);
+      border-top: 1px solid rgba(30,166,114,.2);
+      border-bottom: 1px solid rgba(30,166,114,.2);
+    }
+
+    .trust h2 { font-size: clamp(1.7rem, 4.3vw, 3.2rem); font-weight: 800; line-height: 1.05; }
+
+    .trust-tile {
+      background: var(--brand-surface);
+      border: 1px solid rgba(30,166,114,.22);
+      border-radius: 16px;
+      padding: 1.2rem 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: .8rem;
+      font-weight: 700;
+      min-height: 80px;
+    }
+
+    .trust-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: var(--green-soft);
+      color: var(--brand-primary);
+      font-size: 1.2rem;
+    }
+
+    .support-screen {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      color: var(--brand-surface);
+      position: relative;
+      overflow: hidden;
+      background: var(--brand-dark);
+    }
+
+    .support-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+    }
+
+    .support-screen::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(130deg, rgba(1,8,18,.84), rgba(12,17,24,.74)),
+        radial-gradient(circle at 10% 10%, rgba(25,195,125,.22), transparent 30%),
+        radial-gradient(circle at 90% 90%, rgba(38,168,255,.2), transparent 25%);
+      z-index: 1;
+    }
+
+    .support-screen h2 {
+      font-size: clamp(2.3rem, 10vw, 7rem);
+      font-weight: 800;
+      line-height: .9;
+      margin: 0;
+      text-shadow: 0 8px 24px rgba(0,0,0,.45);
+      position: relative;
+      z-index: 2;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .65s ease, transform .65s ease;
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .scroll-reveal {
+      opacity: 0;
+      transform: translateY(22px) scale(.985);
+      transition: opacity .65s ease, transform .65s ease;
+      transition-delay: var(--reveal-delay, 0ms);
+    }
+
+    .scroll-reveal.in-view {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .carousel-control-next, .carousel-control-prev {
+      width: 5%;
+    }
+
+    .faq-section {
+      padding: 5rem 0;
+      background: var(--brand-bg);
+    }
+
+    .faq-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      margin-bottom: 1.2rem;
+      color: var(--brand-dark);
+    }
+
+    .faq-section .accordion-item {
+      border: 1px solid rgba(16,42,67,.12);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: .8rem;
+      background: var(--brand-surface);
+    }
+
+    .faq-section .accordion-button {
+      font-weight: 700;
+      color: var(--brand-dark);
+      background: var(--brand-surface);
+    }
+
+    .faq-section .accordion-button:not(.collapsed) {
+      background: rgba(30,166,114,.12);
+      color: var(--brand-dark);
+      box-shadow: none;
+    }
+
+    .faq-section .accordion-button:focus {
+      box-shadow: 0 0 0 .2rem rgba(25, 195, 125, .2);
+    }
+
+    .faq-section .accordion-body {
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .emi-section {
+      padding: 5rem 0;
+      background: linear-gradient(90deg, rgba(59,130,246,.08) 0%, rgba(30,166,114,.08) 100%);
+    }
+
+    .savings-section {
+      padding: 5rem 0;
+      background: #ebebeb;
+    }
+
+    .savings-title {
+      font-size: clamp(1.45rem, 3.1vw, 2.35rem);
+      line-height: 1.1;
+      font-weight: 800;
+      color: var(--brand-dark);
+      margin: 0 0 1.8rem;
+      letter-spacing: -.01em;
+    }
+
+    .calc-label {
+      display: block;
+      font-size: clamp(.92rem, 1.45vw, 1.35rem);
+      color: #121212;
+      font-weight: 700;
+      margin-bottom: .7rem;
+    }
+
+    .calc-input {
+      width: 100%;
+      min-height: 58px;
+      border: 0;
+      border-radius: 0;
+      background: #0f2f60;
+      color: #fff;
+      font-size: 1.2rem;
+      font-weight: 600;
+      padding: .8rem 1.1rem;
+      margin-bottom: 1.7rem;
+    }
+
+    .calc-input::placeholder {
+      color: rgba(255,255,255,.92);
+      letter-spacing: .04em;
+    }
+
+    .calc-btn {
+      margin-top: .7rem;
+      background: #fff;
+      border: 1px solid rgba(16,42,67,.35);
+      color: #171717;
+      font-size: clamp(.9rem, 1.15vw, .98rem);
+      font-weight: 700;
+      padding: .85rem 1.2rem;
+      min-width: 260px;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .calc-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 20px rgba(16,42,67,.14);
+    }
+
+    .result-chart {
+      background: #dce7e9;
+      border-radius: 16px;
+      padding: 1rem 1rem 1.1rem;
+      color: #193f4e;
+      box-shadow: inset 0 0 0 1px rgba(25, 63, 78, 0.08);
+    }
+
+    .range-wrap {
+      margin-bottom: .7rem;
+    }
+
+    .compare-range {
+      width: 100%;
+      accent-color: #3c7574;
+      height: 12px;
+    }
+
+    .range-scale {
+      display: flex;
+      justify-content: space-between;
+      margin-top: .2rem;
+      font-size: .82rem;
+      color: #4f7182;
+      font-weight: 600;
+    }
+
+    .compare-layout {
+      display: grid;
+      grid-template-columns: 42px 1fr;
+      gap: .55rem;
+      align-items: stretch;
+    }
+
+    .y-axis-title {
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      color: #85a0a9;
+      font-size: .62rem;
+      line-height: 1.1;
+      letter-spacing: .01em;
+      margin: auto;
+      text-align: center;
+    }
+
+    .compare-board {
+      position: relative;
+      border-bottom: 1px solid rgba(77, 110, 119, .25);
+      height: 390px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-evenly;
+      gap: 2.2rem;
+      padding: 1.6rem 1rem 0;
+      background-image: repeating-linear-gradient(to top, rgba(77, 110, 119, .2) 0 1px, transparent 1px 20%);
+      background-size: 100% calc(100% - 42px);
+      background-repeat: no-repeat;
+      background-position: 0 0;
+    }
+
+    .y-ticks {
+      position: absolute;
+      left: -2.2rem;
+      top: 0;
+      bottom: 42px;
+      width: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      font-size: .74rem;
+      color: #5e7e8a;
+      font-weight: 600;
+      text-align: right;
+    }
+
+    .compare-bar-wrap {
+      width: 86px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      height: 100%;
+    }
+
+    .compare-bar {
+      width: 100%;
+      display: flex;
+      flex-direction: column-reverse;
+      border-radius: 4px 4px 0 0;
+      overflow: hidden;
+      min-height: 2px;
+      height: 0;
+      transition: height .35s ease;
+    }
+
+    .seg-fixed { background: #18383a; }
+    .seg-maint { background: #4a93d1; }
+    .seg-run { background: #a9afcf; }
+    .seg-save { background: #1ea94f; }
+
+    .bar-name {
+      margin-top: .6rem;
+      font-size: .85rem;
+      font-weight: 700;
+      color: #20495b;
+    }
+
+    .compare-legend {
+      margin-top: .95rem;
+      display: flex;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+      align-items: center;
+      color: #56737d;
+      font-size: .78rem;
+      font-weight: 600;
+    }
+
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: .4rem;
+      transform: translateY(1px);
+    }
+
+    .emi-title {
+      text-align: center;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 800;
+      color: var(--brand-dark);
+      margin-bottom: 2.2rem;
+    }
+
+    .emi-title::after {
+      content: "";
+      width: 220px;
+      height: 4px;
+      background: var(--brand-primary);
+      display: block;
+      margin: .6rem auto 0;
+    }
+
+    .emi-label {
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: var(--brand-dark);
+      margin-bottom: .3rem;
+    }
+
+    .emi-val {
+      color: var(--brand-primary);
+      font-weight: 700;
+      float: right;
+    }
+
+    .emi-slider {
+      width: 100%;
+      accent-color: var(--brand-primary);
+    }
+
+    .emi-summary {
+      background: linear-gradient(120deg, rgba(59,130,246,.35), rgba(59,130,246,.75));
+      color: var(--brand-dark);
+      border-radius: 0;
+      padding: 2rem;
+      min-height: 205px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .emi-summary .row-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 1.5rem;
+    }
+
+    .emi-summary .row-line:last-child {
+      margin-bottom: 0;
+    }
+
+    .emi-summary .amt {
+      font-size: 2.1rem;
+      font-weight: 800;
+      color: var(--brand-dark);
+    }
+
+    .emi-field {
+      border: 1px solid rgba(16,42,67,.18);
+      border-radius: 10px;
+      min-height: 56px;
+    }
+
+    .emi-benefits {
+      background: var(--brand-surface);
+      border: 1px solid rgba(16,42,67,.12);
+      border-radius: 14px;
+      margin-top: 1.8rem;
+      padding: 1.6rem 1.8rem;
+    }
+
+    .emi-benefits h4 {
+      font-weight: 800;
+      margin-bottom: 1rem;
+      color: var(--brand-dark);
+    }
+
+    .emi-benefits ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      color: var(--muted);
+      line-height: 2;
+    }
+
+    .site-footer {
+      background: var(--brand-dark);
+      color: rgba(255,255,255,.78);
+      border-radius: 0 38px 0 0;
+      overflow: hidden;
+      margin-top: 0;
+    }
+
+    .footer-top {
+      padding: 0;
+    }
+
+    .footer-subscribe {
+      background: var(--brand-primary);
+      color: var(--brand-surface);
+      padding: 2.2rem 1.8rem;
+      height: 100%;
+    }
+
+    .footer-subscribe h3 {
+      font-size: clamp(1.5rem, 2.3vw, 2.2rem);
+      font-weight: 800;
+      margin: .8rem 0 1.2rem;
+      line-height: 1.2;
+    }
+
+    .footer-subscribe .form-control {
+      border-radius: 0;
+      border: 0;
+      min-height: 52px;
+    }
+
+    .footer-subscribe .btn {
+      border-radius: 0 0 30px 0;
+      padding: .9rem 2rem;
+      font-weight: 800;
+      margin-top: 1rem;
+      background: var(--brand-dark);
+      border: 0;
+      color: var(--brand-surface);
+    }
+
+    .footer-col {
+      padding: 2.4rem 1.5rem;
+    }
+
+    .footer-col h5 {
+      color: var(--brand-surface);
+      font-weight: 700;
+      margin-bottom: 1.2rem;
+    }
+
+    .footer-col h5::after {
+      content: "";
+      display: block;
+      width: 52px;
+      height: 4px;
+      background: var(--brand-primary);
+      margin-top: .65rem;
+    }
+
+    .footer-col p, .footer-col li, .footer-col a {
+      color: rgba(255,255,255,.68);
+      text-decoration: none;
+      line-height: 1.7;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer-col ul li {
+      margin-bottom: .5rem;
+    }
+
+    .footer-phone {
+      color: var(--brand-primary) !important;
+      font-size: 1.7rem;
+      font-weight: 800;
+      margin-top: .8rem;
+      display: inline-block;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.08);
+      background: var(--brand-dark);
+      padding: 1.25rem 1rem;
+    }
+
+    .footer-mini-links {
+      color: rgba(255,255,255,.6);
+      font-size: .95rem;
+    }
+
+    .footer-brand {
+      text-align: center;
+    }
+
+    .footer-brand-logo {
+      width: min(100%, 260px);
+      height: auto;
+      display: block;
+      margin-inline: auto;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: .6rem;
+      justify-content: end;
+    }
+
+    .footer-social a {
+      width: 60px;
+      height: 60px;
+      border: 1px solid rgba(255,255,255,.22);
+      display: grid;
+      place-items: center;
+      color: rgba(255,255,255,.85);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    @media (max-width: 991.98px) {
+      .hero {
+        min-height: 72vh;
+      }
+      .section-pad,
+      .video-section,
+      .savings-section,
+      .emi-section,
+      .faq-section {
+        padding: 3.25rem 0;
+      }
+      .mission-media {
+        min-height: 420px;
+      }
+      .ride-media {
+        min-height: 420px;
+      }
+      #modelSlider,
+      #modelSlider .carousel-inner,
+      #modelSlider .carousel-item,
+      .model-slide,
+      .asset-slide {
+        min-height: auto;
+      }
+      .model-slide,
+      .asset-slide {
+        padding: 1.5rem;
+      }
+      .footer-social {
+        justify-content: start;
+      }
+      .footer-brand { text-align: left; }
+      .footer-brand-logo { margin-inline: 0; }
+    }
+
+    @media (max-width: 767px) {
+      .brand-logo { width: clamp(120px, 32vw, 170px); }
+      .mission-media {
+        min-height: 340px;
+      }
+      .mission-img-main {
+        width: 78%;
+        min-height: 220px;
+      }
+      .mission-img-overlay {
+        left: 12%;
+        width: 86%;
+        min-height: 170px;
+      }
+      .mission-badge {
+        left: auto;
+        right: 2%;
+        top: 2%;
+        width: 92px;
+        height: 92px;
+        font-size: .86rem;
+      }
+      .video-wrap iframe {
+        min-height: 220px;
+      }
+      .ride-media,
+      .ride-media img {
+        min-height: 240px;
+      }
+      .ride-overlay {
+        display: none;
+      }
+      .ride-mobile-copy {
+        display: block;
+      }
+      .savings-title {
+        margin-bottom: 1.25rem;
+      }
+      .calc-input {
+        min-height: 52px;
+        font-size: 1rem;
+        margin-bottom: 1.25rem;
+      }
+      .calc-btn {
+        width: 100%;
+        min-width: 0;
+      }
+      .compare-layout {
+        grid-template-columns: 1fr;
+      }
+      .y-axis-title {
+        display: none;
+      }
+      .compare-board {
+        height: 300px;
+        padding-left: 2.1rem;
+      }
+      .y-ticks {
+        left: 0;
+      }
+      .compare-bar-wrap {
+        width: 72px;
+      }
+      .bar-name {
+        font-size: .78rem;
+      }
+      .emi-label {
+        font-size: 1.1rem;
+      }
+      .emi-summary .amt {
+        font-size: 1.4rem;
+      }
+      .footer-subscribe,
+      .footer-col {
+        padding: 1.5rem 1.2rem;
+      }
+      .footer-social a {
+        width: 46px;
+        height: 46px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="top-header sticky-top">
+    <nav class="navbar navbar-expand-lg main-nav py-2">
+      <div class="container-fluid px-3 px-lg-4">
+        <a class="brand-wrap w-50" href="#home">
+          <img src="assets/images/Ng_logo.png" alt="Neelgiri Motocorp logo" class="brand-logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="mainNav">
+          <ul class="navbar-nav ms-auto gap-lg-2">
+            <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="about_us.html">About Us</a></li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="products.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">Products</a>
+              <ul class="dropdown-menu" id="productsDropdownMenu">
+                <li><a class="dropdown-item" href="products.html">Loading models...</a></li>
+              </ul>
+            </li>
+            <!-- <li class="nav-item"><a class="nav-link" href="#">Find Your Store</a></li>
+            <li class="nav-item"><a class="nav-link" href="#test-ride">Test Ride</a></li> -->
+            <li class="nav-item"><a class="nav-link" href="contact_us.html">Contact</a></li>
+            <!-- <li class="nav-item"><a class="nav-link" href="#">Blog</a></li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Book Now</a>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="#test-ride">Book Test Ride</a></li>
+                <li><a class="dropdown-item" href="#models">Book Scooter</a></li>
+              </ul>
+            </li> -->
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <section id="home" class="hero">
+    <img src="assets/images/hero-banner.png" alt="Electric scooter in motion" class="hero-media">
+  </section>
+
+  <section class="mission-section">
+    <div class="container">
+      <div class="row g-4 align-items-center">
+        <div class="col-lg-6">
+          <div class="mission-media reveal">
+            <!-- <div class="mission-img-main"><img src="assets/images/models/Aeris.png" alt="Scooter close-up"></div> -->
+            <div class="mission-badge"><div><span style="font-size:2rem;">85%</span><br>Clients</div></div>
+            <div class="mission-img-main"><img src="assets/images/models/Glidr.png" alt="Electric scooter model"></div>
+          </div>
+        </div>
+        <div class="col-lg-6 reveal">
+          <div class="mission-kicker">What We Do!</div>
+          <h2 class="mission-title">Our mission is to Electrify<br>Your Nilgiri Rides</h2>
+          <p class="mission-copy">Lets bring the change and charge Up your day to day rides with Nilgiri excellent EV technologies and cost effective riding solutions.we are here to nurture life style that isn't just reach from the outside but has deeper values rooted with it a Lifestyle that believes in giving back to the nature</p>
+          <div class="row g-4 mt-1">
+            <div class="col-md-6">
+              <div class="mission-point-title">Optimum Battery<br>Life</div>
+              <p class="text-muted mb-0 mt-2">Experience the quality standard of our E-bikes optimum battery life</p>
+            </div>
+            <div class="col-md-6">
+              <div class="mission-point-title">No Driving Issues</div>
+              <p class="text-muted mb-0 mt-2">We love to cater our riding customer's a hassle free experience.</p>
+            </div>
+          </div>
+          <div class="check-row"><span class="check-icon"><i class="fa-solid fa-check"></i></span><span>Hassel free charging, take home and charge in 4 hours.</span></div>
+          <div class="check-row"><span class="check-icon"><i class="fa-solid fa-check"></i></span><span>Enjoy a hassle-free fast ride by with agronomic & aero dynamics based design.</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="video-section pb-0">
+    <div>
+      <!-- <div class="text-center mb-4 reveal">
+        <h2 class="fw-bold mb-2">See Nilgiri in Action</h2>
+        <p class="text-muted mb-0">Watch how our e-scooters perform on real Indian roads.</p>
+      </div> -->
+      <div class="video-wrap reveal ratio ratio-16x9">
+        <iframe src="https://www.youtube.com/embed/PCugszp8ehk?autoplay=1&mute=1&loop=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+    </div>
+  </section>
+
+  <section id="test-ride" class="section-pad pt-0">
+    <div class="container-fluid p-0">
+      <div class="ride-card reveal rounded-0">
+        <div class="ride-media">
+          <img src="assets/images/pexels-ulyutkafile-30600051.jpg" alt="Electric scooter rider for test ride">
+          <div class="ride-overlay">
+            <h3 class="fw-bold mb-3">Book a Test Ride</h3>
+            <p class="text-white-50 mb-4">Experience the ride before you decide</p>
+            <button class="btn btn-electric align-self-start">Book a Test Ride</button>
+          </div>
+        </div>
+        <div class="ride-mobile-copy">
+          <h3 class="fw-bold mb-3">Book a Test Ride</h3>
+          <p class="text-white-50 mb-4">Experience the ride before you decide</p>
+          <button class="test-btn">Book a Test Ride</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="models" class="section-pad pt-0">
+    <div class="container-fluid">
+      <div class="models-wrap reveal">
+        <div id="modelSlider" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner" id="modelSliderInner"></div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#modelSlider" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#modelSlider" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="modal fade" id="viewer360Modal" tabindex="-1" aria-labelledby="viewer360Title" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+      <div class="modal-content border-0">
+        <div class="modal-header">
+          <h5 class="modal-title" id="viewer360Title">360 Product Viewer</h5>
+          <div class="viewer-ctrls me-2">
+            <button type="button" class="viewer-btn" id="viewerPrev" aria-label="Previous angle"><i class="fa-solid fa-chevron-left"></i></button>
+            <button type="button" class="viewer-btn" id="viewerNext" aria-label="Next angle"><i class="fa-solid fa-chevron-right"></i></button>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="viewer-360-wrap" id="viewer360Area">
+            <img id="viewer360Image" class="viewer-360-img" src="" alt="360 Product View">
+            <div class="viewer-360-hint">Drag to rotate</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="savings-section">
+    <div class="container">
+      <h2 class="savings-title">Buying an EV is money in the bank.</h2>
+      <div class="row g-4 g-lg-5 align-items-start">
+        <div class="col-lg-6">
+          <label class="calc-label" for="daily-commute">Enter your average daily commute (in kms)</label>
+          <input id="daily-commute" type="text" class="calc-input" placeholder="0000" autocomplete="false">
+
+          <label class="calc-label" for="petrol-price">Enter the petrol price in your location (per litre)</label>
+          <input id="petrol-price" type="text" class="calc-input" placeholder="0000" autocomplete="false">
+
+          <label class="calc-label" for="mileage">Enter the mileage of existing petrol scooter (per litre)</label>
+          <input id="mileage" type="text" class="calc-input" placeholder="0000" autocomplete="false">
+
+          <button id="calcSavingsBtn" type="button" class="btn btn-electric">Calculate Your Savings</button>
+        </div>
+        <div class="col-lg-6">
+          <div class="result-chart">
+            <div class="range-wrap">
+              <input id="compareRange" type="range" min="15" max="100" value="15" class="compare-range">
+              <div class="range-scale"><span>15 Km</span><span>100 Km</span></div>
+            </div>
+            <div class="compare-layout">
+              <div class="y-axis-title">Total cost of ownership (monthly)</div>
+              <div class="compare-board">
+                <div class="y-ticks">
+                  <span>₹ 5k</span><span>₹ 4k</span><span>₹ 3k</span><span>₹ 2k</span><span>₹ 1k</span><span>₹ 0</span>
+                </div>
+                <div class="compare-bar-wrap">
+                  <div id="iceBar" class="compare-bar">
+                    <div id="iceRun" class="seg-run"></div>
+                    <div id="iceMaint" class="seg-maint"></div>
+                    <div id="iceFixed" class="seg-fixed"></div>
+                  </div>
+                  <div class="bar-name">ICE Scooter</div>
+                </div>
+                <div class="compare-bar-wrap">
+                  <div id="evBar" class="compare-bar">
+                    <div id="evSave" class="seg-save"></div>
+                    <div id="evMaint" class="seg-maint"></div>
+                    <div id="evFixed" class="seg-fixed"></div>
+                  </div>
+                  <div class="bar-name">Ola S1 Pro</div>
+                </div>
+              </div>
+            </div>
+            <div class="compare-legend">
+              <span><span class="legend-dot" style="background:#18383a;"></span>Fixed cost</span>
+              <span><span class="legend-dot" style="background:#4a93d1;"></span>Maintenance</span>
+              <span><span class="legend-dot" style="background:#a9afcf;"></span>Running cost</span>
+              <span><span class="legend-dot" style="background:#1ea94f;"></span>Savings</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- <section class="emi-section">
+    <div class="container">
+      <h2 class="emi-title">EMI Calculator</h2>
+      <div class="row g-4 align-items-center">
+        <div class="col-lg-6">
+          <div class="mb-4">
+            <div class="emi-label">Loan Amount <span class="emi-val" id="loanAmountVal">₹1,18,125</span></div>
+            <input id="loanAmountRange" type="range" class="emi-slider" min="50000" max="300000" value="118125">
+          </div>
+          <div>
+            <div class="emi-label">Loan Tenure <span class="emi-val" id="loanTenureVal">5 years</span></div>
+            <input id="loanTenureRange" type="range" class="emi-slider" min="1" max="7" value="5">
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="emi-summary">
+            <div class="row-line">
+              <div>
+                <div class="h3 mb-0 fw-bold">Down Payment</div>
+                <small>Including 0% Processing fee other charges</small>
+              </div>
+              <div class="amt" id="downPaymentOut">₹ 0</div>
+            </div>
+            <div class="row-line">
+              <div>
+                <div class="h3 mb-0 fw-bold">Monthly EMI</div>
+                <small>With 9% Rate of Interest</small>
+              </div>
+              <div class="amt" id="monthlyEmiOut">₹ 2452.08</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row g-4 mt-1">
+        <div class="col-md-4">
+          <label class="emi-label fs-3">Variant</label>
+          <select class="form-select emi-field">
+            <option>e1</option>
+            <option>e2</option>
+            <option>e3</option>
+          </select>
+        </div>
+        <div class="col-md-4">
+          <label class="emi-label fs-3">Interest</label>
+          <select class="form-select emi-field" id="interestSel">
+            <option value="9">9%</option>
+            <option value="10">10%</option>
+            <option value="11">11%</option>
+          </select>
+        </div>
+        <div class="col-md-4">
+          <label class="emi-label fs-3">Down Payment</label>
+          <input id="downPaymentIn" class="form-control emi-field" type="number" value="0" placeholder="Enter amount">
+        </div>
+      </div>
+
+      <div class="emi-benefits">
+        <h4>Benefits of Easy Finance</h4>
+        <div class="row">
+          <div class="col-md-3"><ul><li>Loan approval in 5 minutes</li><li>Attractive interest rates</li></ul></div>
+          <div class="col-md-3"><ul><li>Digital pre-approved offer</li><li>Zero processing fees</li></ul></div>
+          <div class="col-md-3"><ul><li>Low down payment</li></ul></div>
+          <div class="col-md-3"><ul><li>Easy documentation</li></ul></div>
+        </div>
+      </div>
+    </div>
+  </section> -->
+
+  <section id="trust" class="section-pad trust">
+    <div class="container">
+      <div class="row g-4 align-items-center">
+        <div class="col-lg-6 reveal">
+          <h2>The well-engineered<br>Nilgiri<br>come with:</h2>
+        </div>
+        <div class="col-lg-6">
+          <div class="d-grid gap-3 reveal">
+            <div class="trust-tile">
+              <div class="trust-icon"><i class="fa-solid fa-shield-heart"></i></div>
+              <div>A trust of 75,000+ Indian Families</div>
+            </div>
+            <div class="trust-tile">
+              <div class="trust-icon"><i class="fa-solid fa-road"></i></div>
+              <div>100% suitability for Indian roads</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="faq-section">
+    <div class="container">
+      <div class="reveal">
+        <h2 class="faq-title">FAQs</h2>
+      </div>
+      <div class="accordion reveal" id="faqAccordion">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="faq-h1">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq-c1" aria-expanded="true" aria-controls="faq-c1">1. What is Nilgiri?</button>
+          </h2>
+          <div id="faq-c1" class="accordion-collapse collapse show" aria-labelledby="faq-h1" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">Nilgiri is an electric two-wheeler brand focused on affordable, high-performance scooters with innovative design, advanced technology, and safety for urban commuters and families.</div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="faq-h2">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-c2" aria-expanded="false" aria-controls="faq-c2">2. What models are currently available in Nilgiri’s product lineup?</button>
+          </h2>
+          <div id="faq-c2" class="accordion-collapse collapse" aria-labelledby="faq-h2" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">Nilgiri offers models such as Nilgiri Max C12, Nilgiri RUV 350, and Nilgiri OoWah, covering family commuting, rugged use cases, and affordable daily mobility.</div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="faq-h3">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-c3" aria-expanded="false" aria-controls="faq-c3">3. What is the range of Nilgiri electric scooters?</button>
+          </h2>
+          <div id="faq-c3" class="accordion-collapse collapse" aria-labelledby="faq-h3" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">Typical range can vary by model and riding conditions: Nilgiri Max C12 up to 123 km*, Nilgiri RUV 350 around 145 km*, and Nilgiri OoWah up to 145 km*.</div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="faq-h4">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-c4" aria-expanded="false" aria-controls="faq-c4">4. Are Nilgiri electric scooters suitable for Indian road conditions?</button>
+          </h2>
+          <div id="faq-c4" class="accordion-collapse collapse" aria-labelledby="faq-h4" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">Yes. They are designed for Indian roads with sturdy build quality, advanced suspension, and practical ground clearance for uneven surfaces.</div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="faq-h5">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-c5" aria-expanded="false" aria-controls="faq-c5">5. What type of battery do Nilgiri scooters use, and how long does it take to charge?</button>
+          </h2>
+          <div id="faq-c5" class="accordion-collapse collapse" aria-labelledby="faq-h5" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">Nilgiri scooters use lithium-ion batteries. Charging time depends on the model: Nilgiri Max C12 ~6 hrs 30 mins, Nilgiri RUV 350 from ~2 hrs 35 mins (fast charger), Nilgiri OoWah 0–80% in ~4 hrs 5 mins.</div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="faq-h6">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-c6" aria-expanded="false" aria-controls="faq-c6">6. What safety features do Nilgiri scooters offer?</button>
+          </h2>
+          <div id="faq-c6" class="accordion-collapse collapse" aria-labelledby="faq-h6" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">Common safety features include roll-over detection, LED lighting, side-stand and main-stand sensors, vehicle health checks, tubeless tires, and multiple battery safety protections.</div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="faq-h7">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-c7" aria-expanded="false" aria-controls="faq-c7">7. Where can I buy a Nilgiri scooter, and do they offer test rides?</button>
+          </h2>
+          <div id="faq-c7" class="accordion-collapse collapse" aria-labelledby="faq-h7" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">You can buy through authorized dealers across India, and test rides are typically available at showrooms.</div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="faq-h8">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-c8" aria-expanded="false" aria-controls="faq-c8">8. What is the warranty and after-sales service provided by Nilgiri?</button>
+          </h2>
+          <div id="faq-c8" class="accordion-collapse collapse" aria-labelledby="faq-h8" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">Nilgiri typically provides warranty coverage for battery and motor, regular authorized-service maintenance, and customer support for issue resolution and assistance.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container footer-top">
+      <div class="row g-0">
+        <div class="col-lg-4">
+          <div class="footer-col">
+            <h5>Nilgiri</h5>
+            <p>One of a leading developer of A-grade commercial & domestic bike projects in India. Since its foundation the company has doubled its capabilities year on year, with its staff numbers.</p>
+          </div>
+        </div>
+        <div class="col-lg-3">
+          <div class="footer-col">
+            <h5>Company info</h5>
+            <ul>
+              <li>» <a href="about_us.html">About Us</a></li>
+              <li>» <a href="contact_us.html">Contact Us</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-5">
+          <div class="footer-col">
+            <h5>Quick Contact</h5>
+            <p>Adjoining Reliance Petrol Pump, Near HPCL depot, Opp. Dera Jassi Pau-Wali, Mansa Road, Bhatinda, Punjab (151001)</p>
+            <p>If you have any questions or need help, feel free to contact with our team.</p>
+            <a href="tel:+919530612345" class="footer-phone">(+91) 95306 12345</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container footer-bottom mt-5 p-5 rounded-top-5">
+      <div>
+        <div class="row align-items-center g-3">
+          <div class="col-lg-5">
+            <div class="footer-mini-links">Where to Find Us&nbsp;&nbsp;|&nbsp;&nbsp;Terms of Payment&nbsp;&nbsp;|&nbsp;&nbsp;Stats Element</div>
+            <div class="mt-2">Copyright © 2025 Nilgiri, All Rights Reserved.</div>
+          </div>
+          <div class="col-lg-2">
+            <div class="footer-brand">
+              <img src="assets/images/Ng_logo.png" alt="Neelgiri Motocorp logo" class="footer-brand-logo">
+            </div>
+          </div>
+          <div class="col-lg-5">
+            <div class="footer-social">
+              <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                <i class="fa-brands fa-facebook-f"></i>
+              </a>
+              <a href="https://x.com" target="_blank" rel="noopener noreferrer" aria-label="X">
+                <i class="fa-brands fa-x-twitter"></i>
+              </a>
+              <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+                <i class="fa-brands fa-youtube"></i>
+              </a>
+              <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <i class="fa-brands fa-linkedin-in"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    $(function () {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            entry.target.classList.add('in-view');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+
+      document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+      const revealTargets = document.querySelectorAll('section .container > *, .model-slide, .trust-tile, .accordion-item, .emi-summary, .product-card');
+      revealTargets.forEach((el, i) => {
+        if (el.classList.contains('reveal')) return;
+        el.classList.add('scroll-reveal');
+        el.style.setProperty('--reveal-delay', `${(i % 6) * 70}ms`);
+        io.observe(el);
+      });
+
+      $('.navbar-nav .nav-link').on('click', function () {
+        $('.navbar-nav .nav-link').removeClass('active');
+        $(this).addClass('active');
+      });
+
+      function formatINR(n) {
+        return new Intl.NumberFormat('en-IN', { maximumFractionDigits: 2 }).format(n);
+      }
+
+      function calcEmi() {
+        const principal = Number($('#loanAmountRange').val() || 0);
+        const years = Number($('#loanTenureRange').val() || 1);
+        const rate = Number($('#interestSel').val() || 9);
+        const down = Number($('#downPaymentIn').val() || 0);
+        const loan = Math.max(principal - down, 0);
+        const months = years * 12;
+        const monthlyRate = rate / 12 / 100;
+        const emi = monthlyRate === 0 ? (loan / months) : (loan * monthlyRate * Math.pow(1 + monthlyRate, months)) / (Math.pow(1 + monthlyRate, months) - 1);
+
+        $('#loanAmountVal').text('₹' + formatINR(principal));
+        $('#loanTenureVal').text(years + ' years');
+        $('#downPaymentOut').text('₹ ' + formatINR(down));
+        $('#monthlyEmiOut').text('₹ ' + formatINR(emi));
+      }
+
+      $('#loanAmountRange, #loanTenureRange, #interestSel, #downPaymentIn').on('input change', calcEmi);
+      calcEmi();
+
+      function setBarHeight(selector, amount, maxAmount) {
+        const percent = Math.max(0, Math.min(100, (amount / maxAmount) * 100));
+        $(selector).css('height', percent + '%');
+      }
+
+      function calcSavings() {
+        const inputCommute = Number($('#daily-commute').val() || 0);
+        const rangeCommute = Number($('#compareRange').val() || 15);
+        const commute = inputCommute > 0 ? inputCommute : rangeCommute;
+        const petrol = Number($('#petrol-price').val() || 0);
+        const mileage = Number($('#mileage').val() || 0);
+
+        $('#daily-commute').val(commute);
+
+        if (!commute || !petrol || !mileage) {
+          setBarHeight('#iceBar', 0, 5000);
+          setBarHeight('#evBar', 0, 5000);
+          setBarHeight('#iceFixed', 0, 1);
+          setBarHeight('#iceMaint', 0, 1);
+          setBarHeight('#iceRun', 0, 1);
+          setBarHeight('#evFixed', 0, 1);
+          setBarHeight('#evMaint', 0, 1);
+          setBarHeight('#evSave', 0, 1);
+          return;
+        }
+
+        const daysPerMonth = 30;
+        const evWhPerKm = 35;
+        const electricityTariffPerKWh = 8;
+        const petrolMaintenancePerKm = 0.60;
+        const evMaintenancePerKm = 0.20;
+        const petrolCo2KgPerLitre = 2.31;
+        const gridCo2KgPerKWh = 0.70;
+
+        const monthlyKm = commute * daysPerMonth;
+        const petrolScooterMonthlyFuelLitres = monthlyKm / mileage;
+        const evMonthlyKWh = (monthlyKm * evWhPerKm) / 1000;
+
+        const petrolMonthlyFuelCost = petrolScooterMonthlyFuelLitres * petrol;
+        const evMonthlyEnergyCost = evMonthlyKWh * electricityTariffPerKWh;
+
+        const petrolMonthlyMaintenance = monthlyKm * petrolMaintenancePerKm;
+        const evMonthlyMaintenance = monthlyKm * evMaintenancePerKm;
+
+        const petrolMonthlyTotal = petrolMonthlyFuelCost + petrolMonthlyMaintenance;
+        const evMonthlyTotal = evMonthlyEnergyCost + evMonthlyMaintenance;
+
+        const monthlySavings = Math.max(petrolMonthlyTotal - evMonthlyTotal, 0);
+        const baseCap = 5000;
+
+        const iceFixed = 2000;
+        const evFixed = 2400;
+        const iceMaint = petrolMonthlyMaintenance;
+        const evMaint = evMonthlyMaintenance;
+        const iceRun = Math.max(petrolMonthlyFuelCost, 0);
+        const evSave = monthlySavings;
+
+        const iceTotalForChart = Math.min(iceFixed + iceMaint + iceRun, baseCap);
+        const evTotalForChart = Math.min(evFixed + evMaint + evSave, baseCap);
+
+        setBarHeight('#iceBar', iceTotalForChart, baseCap);
+        setBarHeight('#evBar', evTotalForChart, baseCap);
+
+        setBarHeight('#iceFixed', iceFixed, iceTotalForChart || 1);
+        setBarHeight('#iceMaint', iceMaint, iceTotalForChart || 1);
+        setBarHeight('#iceRun', iceRun, iceTotalForChart || 1);
+
+        setBarHeight('#evFixed', evFixed, evTotalForChart || 1);
+        setBarHeight('#evMaint', evMaint, evTotalForChart || 1);
+        setBarHeight('#evSave', evSave, evTotalForChart || 1);
+      }
+
+      $('#calcSavingsBtn').on('click', calcSavings);
+      $('#compareRange').on('input change', function () {
+        $('#daily-commute').val($(this).val());
+        calcSavings();
+      });
+      calcSavings();
+
+      let modelsData = [];
+
+      let spinFrames = modelsData.map(m => m.image);
+      let spinIndex = 0;
+      let dragStartX = null;
+      const dragStep = 28;
+      const viewerModalEl = document.getElementById('viewer360Modal');
+      const viewerModal = new bootstrap.Modal(viewerModalEl);
+
+      function showSpinFrame(index) {
+        const total = spinFrames.length;
+        spinIndex = (index + total) % total;
+        const model = modelsData[spinIndex];
+        $('#viewer360Image').attr('src', spinFrames[spinIndex]).attr('alt', model.name + ' 360 view');
+        $('#viewer360Title').text('360 Product Viewer - ' + model.name);
+      }
+
+      function rotateSpin(direction) {
+        showSpinFrame(spinIndex + direction);
+      }
+
+      function renderModelSlides() {
+        const $inner = $('#modelSliderInner');
+        const specRowsFromModel = (m) => ([
+          { k: 'Category', v: m.category || 'N/A' },
+          { k: 'Motor', v: m.motor || 'N/A' },
+          { k: 'Controller', v: m.controller || 'N/A' },
+          { k: 'Braking', v: m.braking_system || 'N/A' },
+          { k: 'Display', v: m.display || 'N/A' }
+        ]);
+        const slidesHtml = modelsData.map((m, i) => {
+          const specsHtml = specRowsFromModel(m).map(s => `<div class="spec-row"><div class="k">${s.k}</div><div class="v">${s.v}</div></div>`).join('');
+          const features = Array.isArray(m.key_features) ? m.key_features : [];
+          const highlightsHtml = features.slice(0, 4).map(h => `<span>${h}</span>`).join('');
+          return `
+            <div class="carousel-item ${i === 0 ? 'active' : ''}">
+              <div class="model-slide featured">
+                <div class="model-image"><img src="${m.image}" alt="${m.name}" data-model-index="${i}"></div>
+                <div class="model-copy">
+                  <div class="featured-top">
+                    <span class="featured-pill">Trending Model</span>
+                    <span class="featured-chip">Best for City Commute</span>
+                  </div>
+                  <h4>${m.name}</h4>
+                  <p>${m.desc || m.category || '-'}</p>
+                  <div class="model-highlights">${highlightsHtml}</div>
+                  <div class="model-specs mb-3">${specsHtml}</div>
+                  <button class="btn btn-electric">Learn More</button>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('');
+        $inner.html(slidesHtml);
+      }
+
+      function renderProductsDropdown() {
+        const $menu = $('#productsDropdownMenu');
+        if (!modelsData.length) {
+          $menu.html('<li><span class="dropdown-item-text">No model data</span></li>');
+          return;
+        }
+        const itemsHtml = modelsData
+          .map(model => `<li><a class="dropdown-item" href="products.html#${model.name.toLowerCase().replace(/\\s+/g, '-')}">${model.name}</a></li>`)
+          .join('');
+        $menu.html(itemsHtml);
+      }
+
+      function applyModelsDataFromJson(data) {
+        if (!Array.isArray(data) || data.length === 0) throw new Error('Empty model data');
+        modelsData = data.map(item => ({
+          name: item.name,
+          image: item.image,
+          desc: item.category || item.top_speed || '-',
+          category: item.category || '',
+          motor: item.motor || '',
+          controller: item.controller || '',
+          braking_system: item.braking_system || '',
+          display: item.display || '',
+          key_features: item.key_features || []
+        }));
+        spinFrames = modelsData.map(m => m.image);
+        renderProductsDropdown();
+        renderModelSlides();
+      }
+
+      $('#modelSliderInner').on('click', '.model-image img', function () {
+        const idx = Number($(this).data('model-index') || 0);
+        showSpinFrame(idx);
+        viewerModal.show();
+      });
+
+      $('#viewerPrev').on('click', function () { rotateSpin(-1); });
+      $('#viewerNext').on('click', function () { rotateSpin(1); });
+
+      $('#viewer360Area').on('mousedown touchstart', function (e) {
+        dragStartX = e.type.includes('touch') ? e.originalEvent.touches[0].clientX : e.clientX;
+      });
+
+      $(window).on('mouseup touchend', function () {
+        dragStartX = null;
+      });
+
+      $('#viewer360Area').on('mousemove touchmove', function (e) {
+        if (dragStartX === null) return;
+        const currentX = e.type.includes('touch') ? e.originalEvent.touches[0].clientX : e.clientX;
+        const diff = currentX - dragStartX;
+        if (Math.abs(diff) >= dragStep) {
+          rotateSpin(diff > 0 ? -1 : 1);
+          dragStartX = currentX;
+        }
+      });
+
+      fetch('assets/data/models.json')
+        .then(res => res.ok ? res.json() : Promise.reject(new Error('Failed to fetch models.json')))
+        .then(applyModelsDataFromJson)
+        .catch(() => {
+          $('#productsDropdownMenu').html('<li><span class="dropdown-item-text text-danger">Failed to load model data</span></li>');
+          $('#modelSliderInner').html('<div class="p-4 text-center text-muted">Model data unavailable.</div>');
+        });
+    });
+  </script>
+</body>
+</html>

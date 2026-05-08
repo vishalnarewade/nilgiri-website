@@ -1,0 +1,149 @@
+[
+  {
+    "slug": "luma",
+    "name": "Luma",
+    "image": "assets/images/models/Luma.png",
+    "category": "Premium Urban Electric Scooter",
+    "motor": "High-performance electric motor setup",
+    "controller": "Intelligent controller technology",
+    "braking_system": "Reliable front & rear braking support",
+    "display": "Smart colorful digital display",
+    "top_speed": "Optimized for urban and daily riding",
+    "key_features": [
+      "LED lighting system",
+      "Multiple riding modes",
+      "Reverse riding support",
+      "Anti-theft security system",
+      "Remote key access",
+      "Comfortable seating and footrest",
+      "Rear utility carrier",
+      "USB charging support"
+    ]
+  },
+  {
+    "slug": "voltra-x",
+    "name": "Voltra X",
+    "image": "assets/images/models/Voltra_X.png",
+    "category": "Smart Performance Electric Scooter",
+    "motor": "High-performance electric motor setup",
+    "controller": "Intelligent controller technology",
+    "braking_system": "Reliable front & rear braking support",
+    "display": "Smart colorful digital display",
+    "top_speed": "Optimized for urban and daily riding",
+    "key_features": [
+      "LED lighting system",
+      "Multiple riding modes",
+      "Reverse riding support",
+      "Anti-theft security system",
+      "Remote key access",
+      "Comfortable seating and footrest",
+      "Rear utility carrier",
+      "USB charging support"
+    ]
+  },
+  {
+    "slug": "amper",
+    "name": "Amper",
+    "image": "assets/images/models/Amper.png",
+    "category": "Everyday Smart EV Scooter",
+    "motor": "High-performance electric motor setup",
+    "controller": "Intelligent controller technology",
+    "braking_system": "Reliable front & rear braking support",
+    "display": "Smart colorful digital display",
+    "top_speed": "Optimized for urban and daily riding",
+    "key_features": [
+      "LED lighting system",
+      "Multiple riding modes",
+      "Reverse riding support",
+      "Anti-theft security system",
+      "Remote key access",
+      "Comfortable seating and footrest",
+      "Rear utility carrier",
+      "USB charging support"
+    ]
+  },
+  {
+    "slug": "glide",
+    "name": "Glide",
+    "image": "assets/images/models/Glidr.png",
+    "category": "Compact City Ride Scooter",
+    "motor": "High-performance electric motor setup",
+    "controller": "Intelligent controller technology",
+    "braking_system": "Reliable front & rear braking support",
+    "display": "Smart colorful digital display",
+    "top_speed": "Optimized for urban and daily riding",
+    "key_features": [
+      "LED lighting system",
+      "Multiple riding modes",
+      "Reverse riding support",
+      "Anti-theft security system",
+      "Remote key access",
+      "Comfortable seating and footrest",
+      "Rear utility carrier",
+      "USB charging support"
+    ]
+  },
+  {
+    "slug": "aeris",
+    "name": "Aeris",
+    "image": "assets/images/models/Aeris.png",
+    "category": "Stylish Daily Commute Scooter",
+    "motor": "High-performance electric motor setup",
+    "controller": "Intelligent controller technology",
+    "braking_system": "Reliable front & rear braking support",
+    "display": "Smart colorful digital display",
+    "top_speed": "Optimized for urban and daily riding",
+    "key_features": [
+      "LED lighting system",
+      "Multiple riding modes",
+      "Reverse riding support",
+      "Anti-theft security system",
+      "Remote key access",
+      "Comfortable seating and footrest",
+      "Rear utility carrier",
+      "USB charging support"
+    ]
+  },
+  {
+    "slug": "zoro",
+    "name": "Zoro",
+    "image": "assets/images/models/Zoro.png",
+    "category": "Classic Utility Electric Scooter",
+    "motor": "High-performance electric motor setup",
+    "controller": "Intelligent controller technology",
+    "braking_system": "Reliable front & rear braking support",
+    "display": "Smart colorful digital display",
+    "top_speed": "Optimized for urban and daily riding",
+    "key_features": [
+      "LED lighting system",
+      "Multiple riding modes",
+      "Reverse riding support",
+      "Anti-theft security system",
+      "Remote key access",
+      "Comfortable seating and footrest",
+      "Rear utility carrier",
+      "USB charging support"
+    ]
+  },
+  {
+    "slug": "sonex",
+    "name": "Sonex",
+    "image": "assets/images/models/Sonex.png",
+    "category": "Advanced Smart Electric Scooter",
+    "motor": "High-performance electric motor setup",
+    "controller": "Intelligent controller technology",
+    "braking_system": "Reliable front & rear braking support",
+    "display": "Smart colorful digital display",
+    "top_speed": "Optimized for urban and daily riding",
+    "key_features": [
+      "LED lighting system",
+      "Multiple riding modes",
+      "Reverse riding support",
+      "Anti-theft security system",
+      "Remote key access",
+      "Comfortable seating and footrest",
+      "Rear utility carrier",
+      "USB charging support"
+    ]
+  }
+]
