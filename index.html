@@ -50,7 +50,32 @@
   </header>
 
   <section id="home" class="hero">
-    <img src="assets/images/hero-banner.png" alt="Electric scooter in motion" class="hero-media">
+    <div id="heroBannerSlider" class="carousel slide hero-slider carousel-fade" data-bs-ride="carousel" data-bs-interval="3500" data-bs-pause="false">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#heroBannerSlider" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#heroBannerSlider" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <!-- <button type="button" data-bs-target="#heroBannerSlider" data-bs-slide-to="2" aria-label="Slide 3"></button> -->
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="assets/images/banner-1.jpeg" alt="Nilgiri electric scooter banner 1" class="hero-media">
+        </div>
+        <div class="carousel-item">
+          <img src="assets/images/banner-2.jpeg" alt="Nilgiri electric scooter banner 2" class="hero-media">
+        </div>
+        <!-- <div class="carousel-item">
+          <img src="assets/images/banner-3.jpeg" alt="Nilgiri electric scooter banner 3" class="hero-media">
+        </div> -->
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#heroBannerSlider" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#heroBannerSlider" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
   </section>
 
   <div class="modal fade" id="viewer360Modal" tabindex="-1" aria-labelledby="viewer360Title" aria-hidden="true">
@@ -101,14 +126,15 @@
     </div>
   </section>
 
-  <section class="video-section pb-0">
+  <section class="video-section py-0">
     <div>
       <!-- <div class="text-center mb-4 reveal">
         <h2 class="fw-bold mb-2">See Nilgiri in Action</h2>
         <p class="text-muted mb-0">Watch how our e-scooters perform on real Indian roads.</p>
       </div> -->
       <div class="video-wrap reveal ratio ratio-16x9">
-        <iframe src="https://www.youtube.com/embed/PCugszp8ehk?autoplay=1&mute=1&loop=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <video src="assets/videos/branding-video.mp4" autoplay muted loop></video>
+        <!-- <iframe src="https://www.youtube.com/embed/PCugszp8ehk?autoplay=1&mute=1&loop=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> -->
       </div>
     </div>
   </section>

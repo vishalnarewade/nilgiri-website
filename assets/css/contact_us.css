@@ -4,12 +4,15 @@
         radial-gradient(circle at 8% 90%, rgba(0,93,196,.12), transparent 28%),
         var(--bg);
     }
-    .hero { padding: 2.2rem 0 1.3rem; }
+    .hero { 
+      padding: 2.2rem 0 1.3rem;
+      background: linear-gradient(90deg, #0b1118 0%, #222 10%, #333 30%, #333 70%, #222, 90%, #0e151e 100%);
+    }
 
     .hero-panel {
-      background:
+      /* background:
         linear-gradient(118deg, rgba(11,29,51,.92), rgba(17,48,86,.78)),
-        url('assets/images/hero-banner.png') center/cover no-repeat;
+        url('assets/images/hero-banner.png') center/cover no-repeat; */
       color: #fff;
       border-radius: 24px;
       padding: 2.1rem 1.4rem;
@@ -18,7 +21,7 @@
       overflow: hidden;
     }
 
-    .hero-panel::before {
+    /* .hero-panel::before {
       content: "";
       position: absolute;
       inset: 0;
@@ -26,7 +29,7 @@
         radial-gradient(circle at 10% 15%, rgba(0,93,196,.28), transparent 28%),
         radial-gradient(circle at 88% 84%, rgba(192,192,192,.16), transparent 30%);
       pointer-events: none;
-    }
+    } */
 
     .hero-panel > * { position: relative; z-index: 1; }
 
